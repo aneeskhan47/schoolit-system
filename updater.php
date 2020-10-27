@@ -145,7 +145,7 @@ class WP_GitHub_Updater {
 			extract( parse_url( $this->config['zip_url'] ) ); // $scheme, $host, $path
 
 			$zip_url = $scheme . '://api.github.com/repos' . $path;
-			$zip_url = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $zip_url );
+			// $zip_url = add_header( array( 'access_token' => $this->config['access_token'] ), $zip_url );
 
 			$this->config['zip_url'] = $zip_url;
 		}
@@ -267,10 +267,11 @@ class WP_GitHub_Updater {
 	 */
 	public function remote_get( $query ) {
 		if ( ! empty( $this->config['access_token'] ) )
-			$query = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $query );
+			$token = 'token '.$this->config['access_token'].'';
 
 		$raw_response = wp_remote_get( $query, array(
-			'sslverify' => $this->config['sslverify']
+			'sslverify' => $this->config['sslverify'],
+			'headers' => array( 'Authorization' => $token) 
 		) );
 
 		return $raw_response;
@@ -367,7 +368,8 @@ class WP_GitHub_Updater {
 			$response = new stdClass;
 			$response->new_version = $this->config['new_version'];
 			$response->slug = $this->config['proper_folder_name'];
-			$response->url = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $this->config['github_url'] );
+			// $response->url = add_query_arg( array( 'access_token' => $this->config['access_token'] ), $this->config['github_url'] );
+			$response->url = $this->config['github_url'];
 			$response->package = $this->config['zip_url'];
 
 			// If response is false, don't alter the transient

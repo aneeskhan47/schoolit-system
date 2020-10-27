@@ -3,7 +3,7 @@
 Plugin Name: Schoolit-System Plugin
 Plugin URI: schoolitsystem.com
 Description: Schoolit-System Forms Plugin
-Version: 0.0.1
+Version: 0.0.2
 Author: SchoolitSystem
 Author URI: schoolitsystem.com
 Text Domain: schoolitsystem
