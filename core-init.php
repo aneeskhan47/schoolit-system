@@ -9,15 +9,6 @@
 // If this file is called directly, abort. //
 if ( ! defined( 'WPINC' ) ) {die;} // end if
 
-if( ! class_exists( 'Smashing_Updater' ) ){
-	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
-}
-
-$updater = new Smashing_Updater( __FILE__ );
-$updater->set_username( 'aneeskhan47' );
-$updater->set_repository( 'schoolit-system');
-$updater->initialize();
-
 
 // register_activation_hook(__FILE__, 'ss_register_activation_hook');
 // register_deactivation_hook(__FILE__, 'ss_register_deactivation_hook');
