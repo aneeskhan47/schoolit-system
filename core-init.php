@@ -9,24 +9,15 @@
 // If this file is called directly, abort. //
 if ( ! defined( 'WPINC' ) ) {die;} // end if
 
-include_once('updater.php');
-
-if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
-	$config = array(
-		'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
-		'proper_folder_name' => 'schoolit-system', // this is the name of the folder your plugin lives in
-		'api_url' => 'https://api.github.com/users/aneeskhan47/repos/schoolit-system', // the GitHub API url of your GitHub repo
-		'raw_url' => 'https://raw.githubusercontent.com/aneeskhan47/schoolit-system/master', // the GitHub raw url of your GitHub repo
-		'github_url' => 'https://github.com/aneeskhan47/schoolit-system', // the GitHub url of your GitHub repo
-		'zip_url' => 'https://github.com/aneeskhan47/schoolit-system/zipball/master', // the zip url of the GitHub repo
-		'sslverify' => false, // whether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
-		'requires' => '4.0', // which version of WordPress does your plugin require?
-		'tested' => '5.5', // which version of WordPress is your plugin tested up to?
-		'readme' => 'README.md', // which file to use as the readme for the version number
-		'access_token' => '46476c8aa717c18ba06d69ec96047f1af80fb118', // Access private repositories by authorizing under Plugins > GitHub Updates when this example plugin is installed
-	);
-	new WP_GitHub_Updater($config);
+if( ! class_exists( 'Smashing_Updater' ) ){
+	include_once( plugin_dir_path( __FILE__ ) . 'updater.php' );
 }
+
+$updater = new Smashing_Updater( __FILE__ );
+$updater->set_username( 'aneeskhan47' );
+$updater->set_repository( 'schoolit-system');
+$updater->initialize();
+
 
 // register_activation_hook(__FILE__, 'ss_register_activation_hook');
 // register_deactivation_hook(__FILE__, 'ss_register_deactivation_hook');
